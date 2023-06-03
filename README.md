@@ -125,9 +125,22 @@ br>from Employees
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/fcb2918b-ce27-412c-9b5c-3cf4df27d57e)
    <br>
   <br>
+  <b>Show the FirstName and LastName columns from the Employees table, and then create a new column called FullName, showing FirstName and LastName joined together in one column, with a space in between</b>
+  <br>
+  <br>
+  Select FirstName, LastName, FullName= concat(FirstName, ' ', LastName)
+<br>from Employees
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/b97125a3-92b4-4cd7-ad9f-c9b0adee96c0)
+ <br>
+  <br>
   <b>xxx</b>
   <br>
   <br>
+  
+  
+  
 
   
   
