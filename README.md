@@ -166,9 +166,18 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/3af5d9aa-2843-4be3-bffc-6a22b36c63be)
    <br>
   <br>
-  <b>x</b>
+  <b>Show a list of countries where the Northwind company has customers</b>
   <br>
   <br>
+  Select Country from Customers
+<br>group by Country
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/9c1b42f5-7fff-4497-913b-494d7f38ab40)
+<br>
+  <br>
+  
+  
 
   
 
