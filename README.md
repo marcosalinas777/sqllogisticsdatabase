@@ -176,6 +176,33 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/9c1b42f5-7fff-4497-913b-494d7f38ab40)
 <br>
   <br>
+   <b>Show a list of all the different values in the Customers table for ContactTitles.  Also include a count for each ContactTitle</b>
+  <br>
+  <br>
+  Select ContactTitle, totalcontacttitle=COUNT(*) 
+<br>from Customers
+<br>group by ContactTitle
+<br>order by COUNT(*) desc
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/e93d56b0-07a7-4315-8e87-f3bc603b3b85)
+<br>
+  <br>
+  <b>Show for each product, the associated supplier.  Show the ProductID, ProductName and the CompanyName of the Supplier, sort the Result by ProductID</b>
+  <br>
+  <br>
+  Select ProductID, ProductName, Supplier=CompanyName
+<br>from Products
+<br>join Suppliers
+<br>on Products.SupplierID=Suppliers.SupplierID
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/287952c6-4190-4faa-a564-bd4707a3315e)
+<br>
+  <br>
+  
+  
+  
   
   
 
