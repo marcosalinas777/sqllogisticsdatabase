@@ -156,9 +156,21 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/4a89a297-316a-4e60-b8d1-863dd9f261dd)
   <br>
   <br>
-  <b>xx</b>
+  <b>When was the first order?  Show the date of the first order ever made in the Orders table</b>
   <br>
   <br>
+  Select firstorder=min(OrderDate)
+<br>from Orders
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/3af5d9aa-2843-4be3-bffc-6a22b36c63be)
+   <br>
+  <br>
+  <b>x</b>
+  <br>
+  <br>
+
+  
 
   
   
