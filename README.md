@@ -135,9 +135,17 @@ br>from Employees
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/b97125a3-92b4-4cd7-ad9f-c9b0adee96c0)
  <br>
   <br>
-  <b>xxx</b>
+  <b>In the OrderDetails table, we have the fields UnitPrice and Qunatity.  Create a new field, TotalPrice, that multiplies these 2 together.  Show the OrderID, ProductID, UnitPrice, Qunatity and Qunatity.  Order by OrderID and ProductID</b>
+  <br>
+  <br>  
+Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity)
+<br>from OrderDetails
+<br>order by OrderID, ProductID
   <br>
   <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/6b0e845c-6d8e-452b-ad25-3096e9d8d6e8)
+
+  
   
   
   
