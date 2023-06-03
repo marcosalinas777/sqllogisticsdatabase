@@ -273,6 +273,51 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/f50c678d-8529-4b27-8cc4-be965fe34861)
 <br>
   <br>
+   <b>A salesperson for the Company is going on a business trip to visit customers, and would like to see a list of all customers, sorted by region alphabetically.  However he wanst the customers with no region (null in the region field) to be at the end, instead of at the top.  Within the same region companies should be sorted by CustomerID</b>
+  <br>
+  <br>
+  Select CustomerID, CompanyName, Region
+<br>from Customers
+<br>order by
+<br>Case
+<br>when Region is null then 1
+<br>else 0
+<br>END,
+<br>Region,
+<br>CustomerID
+<br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/ecf02a35-fbaf-4aca-9e7a-3d611ff8e33d)
+<br>
+  <br>
+  <b>Some of the countries we shipto have very high freight charges.  We'd like to investigate some more shipping otions for our customers, to be able to offer them lower freight charges.  Return the 3 ship countries with the highest average freight overall, in descending order by average freight</b>
+  <br>
+  <br>
+  Select top 3  ShipCountry, averagefreight = AVG(Freight)
+<br>from Orders	
+<br>group by ShipCountry
+<br>order by averagefreight desc
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/0ca405c2-dd01-4acd-b534-da361944502f)
+<br>
+  <br>
+  <b>We're comtinuing on the question above on high freight charges.  Now instead of using all the orders we have, we only want to see orders from the year 2015</b>
+  <br>
+  <br>
+  Select top 3  ShipCountry, averagefreight = AVG(Freight)
+<br>from Orders	
+<br>where OrderDate>='20150101'
+<br>and OrderDate<='20160101'
+<br>group by ShipCountry
+<br>order by averagefreight desc
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/0d6a1c83-06ab-4e91-9183-dcefeb7e73d3)
+<br>
+  <br>
+  
+  
   
   
   
