@@ -28,6 +28,18 @@ We Have the <b>OrderDetails, Orders, Emloyees, Products, Categories, Suppliers, 
 <br>where Title='Sales Representative'
 <br>
 ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/135bae0a-fde6-4f29-b8e6-44c28dc60583)
+<br>
+<b>Now we'd lilke to see the same columns as above, but only for those employees that both have the title of Sales Representative and also are in the United States</b>
+  <br>
+  <br>
+  select FirstName, LastName, HireDate <BR>from Employees
+where Title='Sales Representative'
+<BR>and
+<br>Country='USA'
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/5827dbe4-01c9-411e-852d-eb6a8630d92a)
+
+  
 
 
   
