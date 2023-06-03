@@ -10,15 +10,14 @@ We Have the <b>OrderDetails, Orders, Emloyees, Products, Categories, Suppliers, 
 <b>Let's see which shippers do we have?</b>
   <br>
   <br>
-  Select * from Shippers
+  Select * <br>from Shippers
   <br>
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/7d15f10f-c9b2-44bb-b71e-547edb497591)
   
   <b>Let's see which CategoryName and Descriptions I have in the Categories table?</b>
   <br>
   <br>
-  select CategoryName, Description 
-  from Categories
+  select CategoryName, Description <br>from Categories
   <br>
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/7e881471-1375-4322-a283-f7256b60fa28)
 
