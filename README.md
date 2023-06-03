@@ -144,6 +144,25 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   <br>
   <br>
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/6b0e845c-6d8e-452b-ad25-3096e9d8d6e8)
+  <br>
+  <br>
+  <b>How many customers do we have in the Customers table?  Show one value only, and don't rely on getting the record count at the end of a result set</b>
+  <br>
+  <br>
+  Select TotalCustomers=COUNT(CustomerID) 
+  <br>from Customers
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/4a89a297-316a-4e60-b8d1-863dd9f261dd)
+  <br>
+  <br>
+  <b>xx</b>
+  <br>
+  <br>
+
+  
+  
+  
 
   
   
