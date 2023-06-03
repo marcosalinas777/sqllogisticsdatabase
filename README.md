@@ -112,7 +112,24 @@ select SupplierID, ContactName, ContactTitle
   <br>
   <br>
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/258916da-185d-4406-9b2d-e1db05e84934)
+   <br>
+  <br>
+  <b>In the output of the query above, showing Employees in order of BirthdDate, we see the time of the BirthDate, which we don't want.  Show only the date portion of the BirthDate field</b>
+  <br>
+  <br>
+Select FirstName, LastName, Title, DateOnlyBirthDate = convert(date,BirthDate) 
+br>from Employees
+<br>order by BirthDate 
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/fcb2918b-ce27-412c-9b5c-3cf4df27d57e)
+   <br>
+  <br>
+  <b>xxx</b>
+  <br>
+  <br>
 
+  
   
   
 
