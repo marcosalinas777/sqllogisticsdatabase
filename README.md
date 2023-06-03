@@ -101,6 +101,20 @@ select SupplierID, ContactName, ContactTitle
   <br>
   <br>
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/07fc7215-f10d-4a4d-93c2-1dd1bdf9e5a1)
+  <br>
+  <br>
+  <b>For all the employees in the Employees table, show the FirstName, LastName, Title and Birthdate.  Order the results by BirthDate, so we have the oldest employees first</b>
+  <br>
+  <br>
+  Select FirstName, LastName, Title, BirthDate 
+<br>from Employees
+<br>order by BirthDate 
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/258916da-185d-4406-9b2d-e1db05e84934)
+
+  
+  
 
   
   
