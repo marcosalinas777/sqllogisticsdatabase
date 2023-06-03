@@ -319,7 +319,8 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   <b>If we use the between command to get the year 2015, we will have an issue of not grabbing order 10806, because the OrderDate data tye is Date Time which includes the time of the day.  The between command in inclusive and would have worked fine if the data type was Date field.  But because the order was done on 20151231 at 11:00:00.000 the query doesnt pick it up because for SQL a Date Time field of '20151231' is equivalent to<br>
   2015-12-31 00:00:00.000
   <br> Tha's why Sweeden came out as 3rd place because the query didn't pick u this french order that was placed at the end of the year</b>
-  Select top 3  ShipCountry, averagefreight = AVG(Freight)
+  <br>
+  <br>Select top 3  ShipCountry, averagefreight = AVG(Freight)
 <br>from Orders	
 <br>where OrderDate between '20150101' and '20151231'
 <br>group by ShipCountry
