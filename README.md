@@ -26,6 +26,7 @@ We Have the <b>OrderDetails, Orders, Emloyees, Products, Categories, Suppliers, 
   <br>
   select FirstName, LastName, HireDate <br>from Employees
 <br>where Title='Sales Representative'
+<br>
 ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/135bae0a-fde6-4f29-b8e6-44c28dc60583)
 
 
