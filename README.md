@@ -4,10 +4,10 @@ This real world practice problems shows how to bring up my SQL skills to the nex
 <br>
 The database has 9 tables, each with its own columns and data:
 <br>
-We Have the <b>OrderDetails, Orders, Emloyees, Products, Categories, Suppliers, Shippers, Customers and CustomerGroupThresholds<b> tables
+We Have the <b>OrderDetails, Orders, Emloyees, Products, Categories, Suppliers, Shippers, Customers and CustomerGroupThresholds</b> tables
 <br>
 <br>
-Let's see which shippers do we have?
+<b>Let's see which shippers do we have?</b>
   <br>
   <br>
   Select * from Shippers
