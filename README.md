@@ -12,12 +12,14 @@ We Have the <b>OrderDetails, Orders, Emloyees, Products, Categories, Suppliers, 
   <br>
   Select * <br>from Shippers
   <br>
+  <br>
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/7d15f10f-c9b2-44bb-b71e-547edb497591)
   <br>
   <b>Let's see which CategoryName and Descriptions I have in the Categories table?</b>
   <br>
   <br>
   select CategoryName, Description <br>from Categories
+  <br>
   <br>
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/7e881471-1375-4322-a283-f7256b60fa28)
 <br>
@@ -26,6 +28,7 @@ We Have the <b>OrderDetails, Orders, Emloyees, Products, Categories, Suppliers, 
   <br>
   select FirstName, LastName, HireDate <br>from Employees
 <br>where Title='Sales Representative'
+<br>
 <br>
 ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/135bae0a-fde6-4f29-b8e6-44c28dc60583)
 <br>
@@ -37,7 +40,20 @@ where Title='Sales Representative'
 <BR>and
 <br>Country='USA'
   <br>
+  <br>
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/5827dbe4-01c9-411e-852d-eb6a8630d92a)
+  <br>
+<b>Show all the orders placed by a specific employee.  The EmployeeID for this Employee (Steven Buchanan) is 5</b>
+  <br>
+  <br>
+  select OrderID, OrderDate
+<br>from Orders
+<br>where 
+<br>EmployeeID=5
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/73c216db-6faa-4cd0-af51-df79ff5ba6aa)
+
 
   
 
