@@ -53,7 +53,18 @@ where Title='Sales Representative'
   <br>
   <br>
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/73c216db-6faa-4cd0-af51-df79ff5ba6aa)
+   <br>
+<b>In the Suppliers table, show the SupplierID, ContactName and ContactTitle for those Suppliers whose ContactTitle is not Marketing Managaer</b>
+  <br>
+  <br>
+select SupplierID, ContactName, ContactTitle
+<br>from Suppliers
+<br>where ContactTitle <> 'Marketing Manager'
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/9d2b866b-d6fb-4e07-925f-c0c0471e6a32)
 
+  
 
   
 
