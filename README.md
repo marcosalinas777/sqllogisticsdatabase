@@ -4,4 +4,4 @@ This real world practice problems shows how to bring up my SQL skills to the nex
 <br>
 The database has 9 tables, each with its own columns and data:
 <br>
-We Have the OrderDetails, Orders, Emloyees, Products, Categories, Suppliers, Shippers, Customers and CustomerGroupThresholds tables
+We Have the <b>OrderDetails, Orders, Emloyees, Products, Categories, Suppliers, Shippers, Customers and CustomerGroupThresholds<b> tables
