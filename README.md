@@ -254,9 +254,25 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/262c470e-173a-46c7-9e97-d92b4f5902e9)
 <br>
   <br>
-  
-  
-  
+   <b>Now we need to incorporate these fields -UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued -into our calculation.  Define the "products that need reordering" with:
+  <br> UnitsInStock + UnitsOnOrder <= ReorderLevel
+                                                 <br>
+  The Discontinued flag is false(0)</b>
+  <br>
+  <br>
+  Select ProductID, ProductName, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued
+<br>from Products
+<br>where
+<br>UnitsInStock + UnitsOnOrder<=ReorderLevel
+<br>AND
+<br>Discontinued=0
+<br>order by 
+<br>ProductID
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/f50c678d-8529-4b27-8cc4-be965fe34861)
+<br>
+  <br>
   
   
   
