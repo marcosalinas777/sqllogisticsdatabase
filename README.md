@@ -240,6 +240,21 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/d99df15f-51e9-4de9-bacb-4b476226706b)
 <br>
   <br>
+   <b>What products do we have in our inventory that should be reordered?  Where UnitsInStock is less or equal to the ReorderLevel</b>
+  <br>
+  <br>
+  Select ProductID, ProductName, UnitsInStock, ReorderLevel
+<br>from Products
+<br>where
+<br>UnitsInStock<=ReorderLevel
+<br>order by 
+<br>ProductID
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/262c470e-173a-46c7-9e97-d92b4f5902e9)
+<br>
+  <br>
+  
   
   
   
