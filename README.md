@@ -84,6 +84,15 @@ select SupplierID, ContactName, ContactTitle
 <b>Looking at the Orders table, there's a field called ShipCountry.  Write a query that shows the OrderID, CustomerID and ShipCountry for the orders where the ShipCountry is either France or Belgium</b>
   <br>
   <br>
+  select OrderID, CustomerID, ShipCountry
+<br>from Orders
+<br>where ShipCountry ='France' or ShipCountry= 'Belgium'
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/5a553385-1b41-47d6-b0a5-7858f8e7af24)
+<br>
+  <br>
+  
 
   
   
