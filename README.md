@@ -212,7 +212,23 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   <br>
   <br>
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/a1b809e4-8e91-44c6-bf25-68a932b21b7a)
-
+  <br>
+  <br>
+  <b>Show a the total number of products in each category.  Sort the results by the number of products, in descending order</b>
+  <br>
+  <br>
+  Select CategoryName, totalproducts=COUNT(*)
+<br>from Products
+<br>join Categories
+<br>on Products.CategoryID=Categories.CategoryID
+<br>group by CategoryName
+<br>order by COUNT(*) desc
+<br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/7ca4fd3e-4609-4ff3-9878-b0eaf402ba01)
+<br>
+  <br>
+  
   
   
   
