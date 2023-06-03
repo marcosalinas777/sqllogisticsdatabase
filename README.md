@@ -39,7 +39,7 @@ We Have the <b>OrderDetails, Orders, Emloyees, Products, Categories, Suppliers, 
   <br>
   <br>
   select FirstName, LastName, HireDate <BR>from Employees
-where Title='Sales Representative'
+<br>where Title='Sales Representative'
 <BR>and
 <br>Country='USA'
   <br>
@@ -92,6 +92,17 @@ select SupplierID, ContactName, ContactTitle
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/5a553385-1b41-47d6-b0a5-7858f8e7af24)
 <br>
   <br>
+  <b>We want to show all OrderID, CustomerID and ShipCountry from orders that came from Brazil, Mexico, Argentina, Venezuela</b>
+  <br>
+  <br>
+  select OrderID, CustomerID, ShipCountry
+<br>from Orders
+<br>where ShipCountry in('Brazil','Mexico','Argentina','Venezuela')
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/07fc7215-f10d-4a4d-93c2-1dd1bdf9e5a1)
+
+  
   
   
 
