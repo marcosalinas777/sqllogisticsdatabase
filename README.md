@@ -200,6 +200,20 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/287952c6-4190-4faa-a564-bd4707a3315e)
 <br>
   <br>
+  <b>Show a list of the Orders that were made, including the Shipper that was used.  Show the OrderID, OrderDate (date only), and CompanyName of the Shipper, and sort by OrderID, Show only rows with OrderID of less than 10270</b>
+  <br>
+  <br>
+  Select OrderID, OrderDate=CONVERT(date,OrderDate), Shipper=CompanyName
+<br>from Shippers
+<br>join Orders
+<br>on Shippers.ShipperID=Orders.ShipVia
+<br>where OrderID<10270
+<br>order by OrderID
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/a1b809e4-8e91-44c6-bf25-68a932b21b7a)
+
+  
   
   
   
