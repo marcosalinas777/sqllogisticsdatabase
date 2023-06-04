@@ -454,8 +454,35 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   <br>
   <br>
     ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/b3c7c5ae-bac4-4d33-bf8f-4691a04dd88e)
-
-
+    <br>
+    <br>
+    <b>Change the answer from the previous problem to use the discount when calculating high-value customers.  Order by the toal amount, taking into consideration the discount.</b>
+  <br>
+    <br>
+    Select
+<br>Customers.CustomerID,
+<br>Customers.CompanyName,
+<br>TotalWithoutDiscount=SUM(Quantity*UnitPrice),
+<br>TotalWithDiscount=SUM(Quantity*UnitPrice*(1-Discount))
+<br>from Customers
+<br>join Orders
+<br>on Orders.CustomerID=Customers.CustomerID
+<br>join OrderDetails
+<br>on Orders.OrderID=OrderDetails.OrderID
+<br>where
+<br>OrderDate>='20160101'
+<br>and OrderDate<'20170101'
+<br>group by
+<br>Customers.CustomerID,
+<br>Customers.CompanyName
+<br>having SUM(Quantity*UnitPrice*(1-Discount))>15000
+<br>order by TotalWithDiscount desc
+<br>
+<br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/0b0c1c73-bc2c-43d3-9a40-7f26583d3acd)
+<br>
+    <br>
+    
   
 
   
