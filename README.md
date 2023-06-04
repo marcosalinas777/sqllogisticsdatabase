@@ -328,7 +328,48 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   <br>
   <br>
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/3027defc-02a5-4654-bb8c-4b604bc049a6)
-
+  <br>
+  <br>
+  <b>We're comtinuing to work on high freight charges.  We now want to get the 3 ship countries with the higherst average freight charges.  But instead of filtering for a particular year, we want to use the last 12 months of order data, using as the end date the last OrderDate in Orders</b>
+  <br>
+  <br>
+  Select top (3) ShipCountry,
+<br>averagefreight = avg(Freight)
+<br>from Orders
+<br>where
+<br>OrderDate >= DATEADD(yy,-1,(select max(OrderDate) from Orders))
+<br>Group by ShipCountry
+<br>order by averagefreight desc
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/d99c146f-a321-4097-803d-c3675aef3768)
+<br>
+  <br>
+   <b>We're doing inventory and need to show Employee and Order Detail information like the below for all orders.  Sort bt OrderID and ProductID</b>
+  <br>
+  <br>
+  Select Employees.EmployeeID,
+<br>Employees.LastName,
+<br>Orders.OrderID,
+<br>Products.ProductName,
+<br>OrderDetails.Quantity
+<br>from Employees
+<br>join Orders
+<br>on Orders.EmployeeID=Employees.EmployeeID
+<br>join OrderDetails
+<br>on Orders.OrderID=OrderDetails.OrderID
+<br>join Products
+<br>on Products.ProductID=OrderDetails.ProductID
+<br>Order by
+<br>Orders.OrderID,
+<br>Products.ProductID
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/10f27c7c-06bb-4afa-8218-0395b3d81cb1)
+<br>
+  <br>
+  
+  
   
   
   
