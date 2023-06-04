@@ -384,8 +384,24 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/8a9ee028-038d-4bf3-bb40-817769f639ed)
 <br>
   <br>
-  
-  
+   <b>One employee (Margaret Peacock, EmployeeIF 4) has placed most the most orders.  However, there are some customers who've placed never an order with her.  Show only those customers who have never an order with her</b>
+  <br>
+  <br>
+  Select
+<br>Customers.CustomerID,
+<br>Orders.CustomerID
+<br>from Customers
+<br>left join Orders
+<br>on Orders.CustomerID=Customers.CustomerID
+<br>and orders.EmployeeID=4
+<br>where
+<br>Orders.CustomerID is null
+<br>Order by Customers.CustomerID
+  <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/f55a15eb-ff66-4764-b2d5-2a2a5bd22524)
+<br>
+  <br>
   
   
   
