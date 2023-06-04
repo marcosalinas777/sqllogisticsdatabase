@@ -368,8 +368,22 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/10f27c7c-06bb-4afa-8218-0395b3d81cb1)
 <br>
   <br>
-  
-  
+   <b>There are customers who have never actually placed an order.  Show these customers</b>
+  <br>
+  <br>
+  Select
+<br>Customers_CustomerID=Customers.CustomerID,
+<br>Orders_CustomerID=Orders.CustomerID
+<br>from Customers
+<br>left join Orders
+<br>on Orders.CustomerID=Customers.CustomerID
+<br>where
+<br>Orders.CustomerID is null
+ <br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/8a9ee028-038d-4bf3-bb40-817769f639ed)
+<br>
+  <br>
   
   
   
