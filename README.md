@@ -402,7 +402,7 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/f55a15eb-ff66-4764-b2d5-2a2a5bd22524)
 <br>
   <br>
-   <b>We wamt to send all of our high-value customers a special VIP gift.  We're defining high-value customers as those who've made at least 1 order with a total value (not including the discount) equal to $10,000 or more. We only want to consider orders made in the year 2016</b>
+   <b>We want to send all of our high-value customers a special VIP gift.  We're defining high-value customers as those who've made at least 1 order with a total value (not including the discount) equal to $10,000 or more. We only want to consider orders made in the year 2016</b>
   <br>
   <br>
   Select
@@ -429,9 +429,32 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/d952d5b1-0c9c-4193-a049-bf777f2f49f8)
 <br>
     <br>
-  
-  
-  
+     <b>The manager has changed his mind.  Instead of requiring that customers have at least one individual order totaling %10,000 or more, he wants to define high-value customers differently.  Now, high value customers are customers who have orders totaling $15,000 or more in 2016.</b>
+  <br>
+    <br>
+    Select
+<br>Customers.CustomerID,
+<br>Customers.CompanyName,
+<br>--Orders.OrderID,
+<br>TotalOrderAmount=SUM(Quantity*UnitPrice)
+<br>from Customers
+<br>join Orders
+<br>on Orders.CustomerID=Customers.CustomerID
+<br>join OrderDetails
+<br>on Orders.OrderID=OrderDetails.OrderID
+<br>where
+<br>OrderDate>='20160101'
+<br>and OrderDate<'20170101'
+<br>group by
+<br>Customers.CustomerID,
+<br>Customers.CompanyName
+<br>--Orders.OrderID
+<br>having sum(Quantity*UnitPrice)>15000
+<br>order by TotalOrderAmount desc
+  <br>
+  <br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/b3c7c5ae-bac4-4d33-bf8f-4691a04dd88e)
+
 
   
 
