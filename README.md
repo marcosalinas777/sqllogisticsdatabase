@@ -482,6 +482,25 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
     ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/0b0c1c73-bc2c-43d3-9a40-7f26583d3acd)
 <br>
     <br>
+    <b>At the end of the month, salespeople are likely to try much harder to get orders, to meet their month-end quotas.  Show all orders made on the last day of the month.  Order by EmployeeID and OrderID</b>
+    <br>
+    <br>
+    Select
+<br>EmployeeID,
+<br>OrderID,
+<br>OrderDate
+<br>from Orders
+<br>where
+<br>OrderDate=EOMONTH(OrderDate)
+<br>order by
+<br>EmployeeID,
+<br>OrderID
+    <br>
+    <br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/548976e3-1b4a-434f-b047-575219a6b4dd)
+<br>
+    <br>
+    
     
   
 
