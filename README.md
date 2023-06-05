@@ -979,14 +979,119 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
     ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/c5288d84-526a-4cb3-9a52-5f918e35ae13)
 <br>
     <br>
-    <b>  </b>
+    <b>The employees going on the business trip don't want just a raw list of countries, they want more details like a supplierCountry and CustomerCountry  </b>
+<br>
+    <br>
+    ;with SupplierCountries as
+<br>(Select Distinct Country from Suppliers),
+<br>CustomerCountries as
+<br>(Select Distinct Country from Customers)
+<br>select
+<br>SupplierCountry = SupplierCountries.Country,
+<br>CustomerCountry = CustomerCountries.Country
+<br>from SupplierCountries
+<br.full outer join CustomerCountries
+<br>on CustomerCountries.Country=SupplierCountries.Country
+    <br>
+    <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/55c6a2e1-a02b-4865-8bd5-93108a3667dd)
+<br>
+    <br>
+    <b>The output in the above practice problem is improved, but it's still not ideal.  What we'd really like to see is the country name, total suppliers and the total customers </b>
+<br>
+    <br>
+    ;with SupplierCountries as
+<br>(Select Country, Total=COUNT(*) from Suppliers group by Country),
+<br>CustomerCountries as
+<br>(Select Country, Total=COUNT(*) from Customers group by Country)
+<br>select
+<br>Country=ISNULL(SupplierCountries.Country, CustomerCountries.Country),
+<br>TotalSuppliers=ISNULL(SupplierCountries.Total,0),
+<br>TotalCustomers=ISNULL(CustomerCountries.Total,0)
+<br>from SupplierCountries
+<br>full Outer join CustomerCountries
+<br>on CustomerCountries.Country=SupplierCountries.Country
+<br>
+    <br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/b91001b3-058b-4783-a68e-31a124160d4d)
+<br>
+    <br>
+    <b>Looking at the Orders table - we'd like to show details for each order that was the first in that particular country, ordered by OrderID. So, for each country, we want one row.  That row should contain  the earliest order for that country, with the associated ShipCountry, CustomerID, OrderID, and OrderDate</b>
+    <br>
+    <br>
+    ;with OrdersByCountry as(
+<br>Select
+<br>ShipCountry,
+<br>CustomerID,
+<br>OrderID,
+<br>OrderDate=CONVERT(date,OrderDate),
+<br>RowNumberPerCountry=ROW_NUMBER()
+<br>over (Partition by ShipCountry Order by ShipCountry, OrderID)
+<br>From Orders)
+<br>Select
+<br>ShipCountry,
+<br>CustomerID,
+<br>OrderID,
+<br>OrderDate
+<br>from OrdersByCountry
+<br>where
+<br>RowNumberPerCountry=1
+<br>Order by
+<br>ShipCountry
+<br>
+    <br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/de2af79c-fdca-46b8-89be-121251e53ddb)
+<br>
+    <br>
+    <b>There are some customers for whom freight is a major expense when ordering from Northwind.  
+    <br> However by, batching up their orders, and making one larger instead of mutiple smaller orders in a short period of time, they could reduce their freight costs significantly.
+    <br>Show those customers who have made more than 1 order in a 5 day period.  The salespeople will use this to help customers reduce their freight costs.
+    </b>
+    <br>
+    <br>
+    Select
+<br>InitialOrder.CustomerID,
+<br>InitialOrderID=InitialOrder.OrderID,
+<br>InitialOrderDate=convert(date,InitialOrder.OrderDate),
+<br>NextOrderID=NextOrder.OrderID,
+<br>NextOrderDate=CONVERT(date,NextOrder.OrderDate),
+<br>DaysBetweenOrders=datediff(dd,InitialOrder.OrderDate,NextOrder.OrderDate)
+<br>from Orders InitialOrder
+<br>join Orders NextOrder
+<br>on InitialOrder.CustomerID=NextOrder.CustomerID
+<br>where
+<br>InitialOrder.OrderID<NextOrder.OrderID
+<br>and datediff(dd,InitialOrder.OrderDate,NextOrder.OrderDate)<=5
+<br>order by
+<br>InitialOrder.CustomerID,
+<br>InitialOrder.OrderID
+   <br> 
+ <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/0550724c-b19c-4ab5-aca2-768795f3252f)
+<br>
+    <br>
+      <b>There's another way of solving the problem above, using Window function.</b)
+  <br>
+        <br>
+        ;with NextOrderDate as(
+Select
+<br>CustomerID,
+<br>OrderDate=CONVERT(date,OrderDate),
+<br>NextOrderDate=CONVERT(date,Lead(OrderDate,1)
+<br>OVER (Partition by CustomerID order by CustomerID, OrderDate))
+<br>from Orders)
+<br>Select
+<br>CustomerID,
+<br>OrderDate,
+<br>NextOrderDate,
+<br>DaysBetweenOrders=DATEDIFF(dd,OrderDate,NextOrderDate)
+<br>from NextOrderDate
+<br>where
+<br>DATEDIFF(dd,OrderDate,NextOrderDate)<=5
+  <br>
+        <br>
+        ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/003a2a74-800d-43b1-b2d0-d12edd3d8fcf)
 
-  
-
-
-  
-  
-  
 
 
 
