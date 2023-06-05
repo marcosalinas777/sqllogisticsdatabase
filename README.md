@@ -627,9 +627,79 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
     ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/609e2b7f-f28f-43e8-a920-fa61a2d65ad6)
 <br>
     <br>
-    
-    
-  
+    <b>Andrew, the VP of sales has been doing soe more thinking about the problme of late orders.  He realizes that just looking at the number of orders arriving late for each salesperson isn't a good idea.  It needs to be compared to the total number of orders per salesperson.  We want results like the following:  </b>
+<br>
+    <br>
+    ;With LateOrders as(
+<br>Select
+<br>EmployeeID,
+<br>TotalOrders = count(*)
+<br>from Orders
+<br>where
+<br>RequiredDate<=ShippedDate
+<br>Group by
+<br>EmployeeID
+<br>),
+<br>AllOrders as(
+<br>Select
+<br>EmployeeID,
+<br>TotalOrders = COUNT(*)
+<br>from Orders
+<br>Group by
+<br>EmployeeID)
+<br>Select
+<br>Employees.EmployeeID,
+<br>LastName,
+<br>AllOrders=AllOrders.TotalOrders,
+<br>LateOrders=LateOrders.TotalOrders
+<br>From Employees
+<br>join AllOrders
+<br>on AllOrders.EmployeeID=Employees.EmployeeID
+<br>Join LateOrders
+<br>on LateOrders.EmployeeID=Employees.EmployeeID
+<br>order by Employees.EmployeeID
+   <br>
+    <br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/b189464e-84c5-4a85-abe3-f86d66b64558)
+<br>
+    <br>
+    <b>There's an employee missing in the answer from the problem above.  Fix the SQL to show all employees who have taken orders </b>
+    <br>
+    <br>
+    With LateOrders as(
+<br>Select
+<br>EmployeeID,
+<br>TotalOrders = count(*)
+<br>from Orders
+<br>where
+<br>RequiredDate<=ShippedDate
+<br>Group by
+<br>EmployeeID
+<br>),
+<br>AllOrders as(
+<br>Select
+<br>EmployeeID,
+<br>TotalOrders = COUNT(*)
+<br>from Orders
+<br>Group by
+<br>EmployeeID)
+<br>Select
+<br>Employees.EmployeeID,
+<br>LastName,
+<br>AllOrders=AllOrders.TotalOrders,
+<br>LateOrders=LateOrders.TotalOrders
+<br>From Employees
+<br>join AllOrders
+<br>on AllOrders.EmployeeID=Employees.EmployeeID
+<br>left Join LateOrders
+<br>on LateOrders.EmployeeID=Employees.EmployeeID
+<br>order by Employees.EmployeeID
+   <br> 
+  <br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/60adb1d1-4d3c-46e6-83e8-cd8901383a06)
+<br>
+    <br>
+    <br>  </b>
   
   
 
