@@ -1070,7 +1070,7 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/0550724c-b19c-4ab5-aca2-768795f3252f)
 <br>
     <br>
-      <b>There's another way of solving the problem above, using Window function.</b)
+    <b>There's another way of solving the problem above, using Window function.</b>
   <br>
         <br>
         ;with NextOrderDate as(
