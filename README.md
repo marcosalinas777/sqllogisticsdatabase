@@ -520,9 +520,75 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
     ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/912e515f-0fe4-49cb-b899-0482bb59383d)
 <BR>
   <BR>
-    <b>38</b>
-  
-
+    <b>One of the salespeople has come to you with a request.  She thinks that she accidentally entered  line item twice on an order, each time with a different ProductI, but the exact same quantity.  She remembers that the quantity was 60 or more.  Show all OrderIDs with line items that match this, in order of OrderID</b>
+    <br>
+    <br>
+    Select 
+<br>OrderID
+<br>From OrderDetails
+<br>where Quantity>=60
+<br>Group by
+<br>OrderID, Quantity
+<br>having COUNT(*)>1
+<br>order by
+<br>OrderID
+  <br>
+    <br>
+![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/594b2c68-b5fd-4327-9a9b-816c11114584)
+<br>
+    <br>
+    <b>Based on the previous question, we now want to show details of the order, for orders that match the above criteria</b>
+      <br>
+      <br>
+    ;with PotentialDuplicates as(
+<br>Select
+<br>OrderID
+<br>From OrderDetails
+<br>where Quantity>=60
+<br>Group by OrderID,Quantity
+<br>having count(*)>1)
+<br>Select
+<br>OrderID,
+<br>ProductID,
+<br>UnitPrice,
+<br>Quantity,
+<br>Discount
+<br>From OrderDetails
+<br>Where 
+<br>OrderID in (Select OrderID from PotentialDuplicates)
+<br>Order by
+<br>OrderID, 
+<br>Quantity
+    <br>
+    <br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/68067283-d516-431a-ae1f-22208000209a)
+<br>
+    <br>
+    <b>Here's another wy of gtting the same results as in the previous problems, using a derived table instead of CTE  </b>
+<br>
+    <br>
+ Select 
+<br>OrderDetails.OrderID,
+<br>ProductID,
+<br>Unitprice,
+<br>Quantity,
+<br>Discount
+<br>From OrderDetails
+<br>join (
+<br>Select distinct
+<br>OrderID
+<br>From OrderDetails
+<br>where Quantity>=60
+<br>group by OrderID, Quantity
+<br>Having Count(*)>1) PotentialProblemOrders
+<br>on PotentialProblemOrders.OrderID = OrderDetails.OrderID
+<br>Order by OrderID, ProductID
+<br>
+<br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/edf03175-537f-4388-a04c-5fc33702c088)
+<br>
+    <br>
+    
   
   
   
