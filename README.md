@@ -772,7 +772,7 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
       ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/8ebcd5ac-291e-4b7f-8447-39b8e390ae1a)
 <br>
       <br>
-      <b>So now for the PercentageLateOrders, we get a decimal value like we should.  BUt to make the output easier to read, let's cut the PercentLateOrders off at 2 digits to the right of the decimal point  </b>
+      <b>So now for the PercentageLateOrders, we get a decimal value like we should.  But to make the output easier to read, let's cut the PercentLateOrders off at 2 digits to the right of the decimal point</b>
   <br>
     <br>
     ;With LateOrders as(
@@ -809,16 +809,177 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
   ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/76c66589-2e78-4340-943b-cb5a66b4c18a)
 <br>
     <br>
+    <b>Andrew Fuller, the VP of sales at Northwind, would like to do a sales campaign for existing customers.  He'd like to categorize customers into groups, based on how much they ordered in 2016.  Then depending on which group the customer is in, he will target the customer with different sales material.<br>
+    The customer grouing categories are 0 to 1000, 1000 to5000, 5000 to 10000 and over 10000.  So if the total ollar mount of the custoer's purchases in that year were between 0 to 1000 they would be in the "Low" group.  A customer with purchases from 1000 to 5000 would be in the Medium group and so on.
+    <br>
+    We only want to show customers who ordered in 2016.  Orde the results by CustomerID</b>
+  <br>
+    <br>
+;With Orders2016 as (
+<br>Select
+<br>Customers.CustomerID,
+<br>Customers.CompanyName,
+<br>TotalOrderAmount=SUM(Quantity*UnitPrice)
+<br>from Customers
+<br>join Orders
+<br>on Orders.CustomerID=Customers.CustomerID
+<br>join OrderDetails
+<br>on Orders.OrderID=OrderDetails.OrderID
+<br>where
+<br>OrderDate>='20160101'
+<br>and OrderDate<'20170101'
+<br>Group by
+<br>Customers.CustomerID,
+<br>Customers.CompanyName)
+<br>Select
+<br>CustomerID,
+<br>CompanyName,
+<br>TotalOrderAmount,
+<br>CustomerGroup=
+<br>Case
+<br>when TotalOrderAmount between 0 and 1000 then 'Low'
+<br>when TotalOrderAmount between 1001 and 5000 then 'Medium'
+<br>when TotalOrderAmount between 5001 and 10000 then 'High'
+<br>when TotalOrderAmount > 10000 then 'Very High'
+<br>.End
+<br>from Orders2016
+<br>order by CustomerID
+<br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/69edd4a1-8da8-4854-9103-2fda6c4f034d)
+<br>
+    <br>
+    <b> There's a problem with the answer to the previous question.  The CustomerGroup value for one of the rows is null.  Fix the SQL so that there are no nulls in the CustomerGroup field </b>
+  <br>
+    <br>
+    ;With Orders2016 as (
+<br>Select
+<br>Customers.CustomerID,
+<br>Customers.CompanyName,
+<br>TotalOrderAmount=SUM(Quantity*UnitPrice)
+<br>from Customers
+<br>join Orders
+<br>on Orders.CustomerID=Customers.CustomerID
+<br>join OrderDetails
+<br>on Orders.OrderID=OrderDetails.OrderID
+<br>where
+<br>OrderDate>='20160101'
+<br>and OrderDate<'20170101'
+<br>Group by
+<br>Customers.CustomerID,
+<br>Customers.CompanyName)
+<br>Select
+<br>CustomerID,
+<br>CompanyName,
+<br>TotalOrderAmount,
+<br>CustomerGroup=
+<br>Case
+<br>when TotalOrderAmount >= 0 and TotalOrderAmount < 1000 then 'Low'
+<br>when TotalOrderAmount >= 1001 and TotalOrderAmount < 5000 then 'Medium'
+<br>when TotalOrderAmount >= 5001 and TotalOrderAmount < 10000 then 'High'
+<br>when TotalOrderAmount >= 10000 then 'Very High'
+<br>End
+<br>from Orders2016
+<br>order by CustomerID
+  <br>
+<br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/b7684270-f9bc-4d1e-a6e2-2ae7cc91c59a)
+<br>
+    <br>
+    <b> Based on the above query, show all the defined CustomerGroups, and the percentage in each.  Sort by total in each group, in descending order </b>
+  <br>
+  <br>
+    ;With Orders2016 as (
+<br>Select
+<br>Customers.CustomerID,
+<br>Customers.CompanyName,
+<br>TotalOrderAmount=SUM(Quantity*UnitPrice)
+<br>from Customers
+<br>join Orders
+<br>on Orders.CustomerID=Customers.CustomerID
+<br>join OrderDetails
+<br>on Orders.OrderID=OrderDetails.OrderID
+<br>where
+<br>OrderDate>='20160101'
+<br>and OrderDate<'20170101'
+<br>Group by
+<br>Customers.CustomerID,
+<br>Customers.CompanyName),
+<br>CustomerGrouping as(
+<br>Select
+<br>CustomerID,
+<br>CompanyName,
+<br>TotalOrderAmount,
+<br>CustomerGroup=
+<br>Case
+<br>when TotalOrderAmount >= 0 and TotalOrderAmount < 1000 then 'Low'
+<br>when TotalOrderAmount >= 1001 and TotalOrderAmount < 5000 then 'Medium'
+<br>when TotalOrderAmount >= 5001 and TotalOrderAmount < 10000 then 'High'
+<br>when TotalOrderAmount >= 10000 then 'Very High'
+<br>End
+<br>from Orders2016
+<br>)
+<br>Select
+<br>CustomerGroup,
+<br>TotalInGroup=COUNT(*),
+<br>PercentageInGroup=COUNT(*)* 1 / (select COUNT(*) from CustomerGrouping)
+<br>from CustomerGrouping
+<br>group by CustomerGroup
+<br>order by TotalInGroup desc
+<br>
+    <br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/d42b19e6-3b81-4c5a-8262-11b0f326b507)
+<br>
+    <br>
+    <b>Andrew, the VP of Sales is still thinking about how best to group customers, and define low, medium, high and very high value customers.  He now wants to complete flexibility to grouping the customers, based on the dollar amunt they've ordered.  He doesn't want to have to edit SQL i order to change the boundaries of the customer groups.  There's a table called CustomerGroupThereshold that I will need to use.  Use only orders from 2016  </b>
+    <br>
+    <br>
+    ;With Orders2016 as (
+<br>Select
+<br>Customers.CustomerID,
+<br>Customers.CompanyName,
+<br>TotalOrderAmount=SUM(Quantity*UnitPrice)
+<br>from Customers
+<br>join Orders
+<br>on Orders.CustomerID=Customers.CustomerID
+<br>join OrderDetails
+<br>on Orders.OrderID=OrderDetails.OrderID
+<br>where
+<br>OrderDate>='20160101'
+<br>and OrderDate<'20170101'
+<br>Group by
+<br>Customers.CustomerID,
+<br>Customers.CompanyName)
+<br>Select
+<br>CustomerID,
+<br>CompanyName,
+<br>TotalOrderAmount,
+<br>CustomerGroupName
+<br>from 
+<br>Orders2016
+<br>join CustomerGroupThresholds
+<br>on Orders2016.TotalOrderAmount between
+<br>CustomerGroupThresholds.RangeBottom and
+<br>CustomerGroupThresholds.RangeTop
+<br>Order by CustomerID
+<br>
+    <br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/081d5ba5-72d6-4c20-ad43-b55afaa53215)
+<br>
+    <br>
+    <b>Some Northwind empoyees are planning a business trip, and would like to visit as many suppliers as ossible.  For their planning they'd like to see a lo st of all countries where suppliers and/or customers are based</b>
+    <br>
+    <br>
+    Select Country from Customers
+<br>Union
+<br>Select Country from Suppliers
+<br>order by Country
+  <br>
+    <br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/c5288d84-526a-4cb3-9a52-5f918e35ae13)
+<br>
+    <br>
     <b>  </b>
-  
-  
-
-  
-  
-  
-
-  
-  
 
   
 
