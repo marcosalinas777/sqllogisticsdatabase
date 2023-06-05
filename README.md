@@ -564,7 +564,7 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
     ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/68067283-d516-431a-ae1f-22208000209a)
 <br>
     <br>
-    <b>Here's another wy of gtting the same results as in the previous problems, using a derived table instead of CTE  </b>
+    <b>Here's another wy of getting the same results as in the previous problems, using a derived table instead of CTE  </b>
 <br>
     <br>
  Select 
@@ -588,6 +588,46 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
     ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/edf03175-537f-4388-a04c-5fc33702c088)
 <br>
     <br>
+    <b>Some customers are complaining about their orders arriving late.  Which orders are late?  Sort the results by OrderID?</b>
+    <br>
+    <br>
+    Select
+<br>OrderID,
+<br>OrderDate=CONVERT(date,OrderDate),
+<br>RequiredDate=CONVERT(date,RequiredDate),
+<br>ShippedDate=CONVERT(date,ShippedDate)
+<br>from Orders
+<br>where
+<br>RequiredDate<=ShippedDate
+<br>order by
+<br>OrderID
+    <br>
+    <br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/2009c9fe-c212-4921-a90a-f96ad2cb1344)
+<br>
+    <br>
+    <b>Some salespeople have more orders arriving late than others.  Maybe they're not following up on the order process, and need more training.  Which salespeople have the most orders arriviing late?  </b>
+    <br>
+    <br>
+    Select
+<br>Employees.EmployeeID,
+<br>LastName,
+<br>TotalLateOrders=COUNT(*)
+<br>from Orders
+<br>join Employees
+<br>on Employees.EmployeeID=Orders.EmployeeID
+<br>where
+<br>RequiredDate<=ShippedDate
+<br>group by
+<br>Employees.EmployeeID,
+<br>Employees.LastName
+<br>Order by TotalLateOrders desc
+                         <br>
+    <br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/609e2b7f-f28f-43e8-a920-fa61a2d65ad6)
+<br>
+    <br>
+    
     
   
   
