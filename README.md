@@ -735,7 +735,7 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
     ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/82b5e69d-a660-4047-8d74-23385303a295)
 <br>
     <br>
-    <b>Now we want to get the percentage of late orders over total orders  </b)
+    <b>Now we want to get the percentage of late orders over total orders  </b>
   <br>
       <br>
       ;With LateOrders as(
@@ -772,10 +772,44 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
       ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/8ebcd5ac-291e-4b7f-8447-39b8e390ae1a)
 <br>
       <br>
-      <b>  </b>
-  
-
-  
+      <b>So now for the PercentageLateOrders, we get a decimal value like we should.  BUt to make the output easier to read, let's cut the PercentLateOrders off at 2 digits to the right of the decimal point  </b>
+  <br>
+    <br>
+    ;With LateOrders as(
+<br>Select
+<br>EmployeeID,
+<br>TotalOrders = count(*)
+<br>from Orders
+<br>where
+<br>RequiredDate<=ShippedDate
+<br>Group by
+<br>mployeeID
+<br>),
+<br>AllOrders as(
+<br>Select
+<br>EmployeeID,
+<br>TotalOrders = COUNT(*)
+<br>from Orders
+<br>Group by
+<br>EmployeeID)
+<br>Select
+<br>Employees.EmployeeID,
+<br>LastName,
+<br>AllOrders=AllOrders.TotalOrders,
+<br>LateOrders=ISNULL(LateOrders.TotalOrders,0),
+<br>PercentLateOrders=convert(decimal(2,2),(IsNull(LateOrders.TotalOrders,0)*1.00)/AllOrders.TotalOrders)
+<br>From Employees
+<br>join AllOrders
+<br>on AllOrders.EmployeeID=Employees.EmployeeID
+<br>left Join LateOrders
+<br>on LateOrders.EmployeeID=Employees.EmployeeID
+<br>order by Employees.EmployeeID
+<br>
+  <br>
+  ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/76c66589-2e78-4340-943b-cb5a66b4c18a)
+<br>
+    <br>
+    <b>  </b>
   
   
 
