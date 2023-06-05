@@ -500,8 +500,27 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
     ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/548976e3-1b4a-434f-b047-575219a6b4dd)
 <br>
     <br>
-    
-    
+    <b>The Company's mobile app developers are testing an app that consumers will use to show orders.  In order to make sure that even the largest orders will show up correctly on the app, they'd like some samples of ordersthat have lots of individual line items.  Show the 10 orders with the most line items, in order of total line items</b>
+    <br>
+    <br>
+   Select top 10 
+<br>OrderID,
+<br>TotalOrderDetails= count(*)
+<br>from OrderDetails
+<br>Group by OrderID
+<br>Order by count(*) desc
+    <br>
+    <br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/99adf78a-d2ca-44f8-aa8e-f98985b6a1f7)
+<br>
+    <br>
+    <b>The Northwind mobile app developers would now lke to just  get a random assortment of orders for beta testing on their app.  Show set of 2% of all orders</b>
+    <br>
+    <br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/912e515f-0fe4-49cb-b899-0482bb59383d)
+<BR>
+  <BR>
+    <b>38</b>
   
 
   
