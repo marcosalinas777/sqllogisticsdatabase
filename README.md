@@ -699,13 +699,80 @@ Select OrderID, ProductID, UnitPrice, Quantity, TotalPrice = (UnitPrice*Quantity
     ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/60adb1d1-4d3c-46e6-83e8-cd8901383a06)
 <br>
     <br>
-    <br>  </b>
-  
-  
-
-  
-  
-  
+    <b>Continuing on the answer for the previous problem, let's fix the results for row 5 -Buchanan.  He should have a 0 instead of a Null in LateOrders  </b>
+  <br>
+  <br>
+  ;With LateOrders as(
+<br>Select
+<br>EmployeeID,
+<br>TotalOrders = count(*)
+<br>from Orders
+<br>where
+<br>RequiredDate<=ShippedDate
+<br>Group by
+<br>EmployeeID
+<br>),
+<br>AllOrders as(
+<br>Select
+<br>EmployeeID,
+<br>TotalOrders = COUNT(*)
+<br>from Orders
+<br>Group by
+<br>EmployeeID)
+<br>Select
+<br>Employees.EmployeeID,
+<br>LastName,
+<br>AllOrders=AllOrders.TotalOrders,
+<br>LateOrders=ISNULL(LateOrders.TotalOrders,0)
+<br>From Employees
+<br>join AllOrders
+<br>on AllOrders.EmployeeID=Employees.EmployeeID
+<br>left Join LateOrders
+<br>on LateOrders.EmployeeID=Employees.EmployeeID
+<br>order by Employees.EmployeeID
+<br>
+    <br>
+    ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/82b5e69d-a660-4047-8d74-23385303a295)
+<br>
+    <br>
+    <b>Now we want to get the percentage of late orders over total orders  </b)
+  <br>
+      <br>
+      ;With LateOrders as(
+<br>Select
+<br>EmployeeID,
+<br>TotalOrders = count(*)
+<br>from Orders
+<br>where
+<br>RequiredDate<=ShippedDate
+<br>Group by
+<br>EmployeeID
+<br>),
+<br>AllOrders as(
+<br>Select
+<br>EmployeeID,
+<br>TotalOrders = COUNT(*)
+<br>from Orders
+<br>Group by
+<br>EmployeeID)
+<br>Select
+<br>Employees.EmployeeID,
+<br>LastName,
+<br>AllOrders=AllOrders.TotalOrders,
+<br>LateOrders=ISNULL(LateOrders.TotalOrders,0),
+<br>PercentLateOrders=(IsNull(LateOrders.TotalOrders,0)*1.00)/AllOrders.TotalOrders
+<br>From Employees
+<br>join AllOrders
+<br>on AllOrders.EmployeeID=Employees.EmployeeID
+<br>left Join LateOrders
+<br>on LateOrders.EmployeeID=Employees.EmployeeID
+<br>order by Employees.EmployeeID
+  <br>
+  <br>
+      ![image](https://github.com/marcosalinas777/sqllogisticsdatabase/assets/95108103/8ebcd5ac-291e-4b7f-8447-39b8e390ae1a)
+<br>
+      <br>
+      <b>  </b>
   
 
   
